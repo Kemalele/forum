@@ -5,7 +5,7 @@ import (
 	"errors"
 )
 
-func Authenticate(username,password string) error{
+func correctUser(username,password string) error{
 	var users models.Users
 	users.Init()
 	for _, usr := range users.Body {
@@ -18,6 +18,6 @@ func Authenticate(username,password string) error{
 		}
 	}
 
+
 	return errors.New("wrong username")
 }
-

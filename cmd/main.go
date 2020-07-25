@@ -13,13 +13,16 @@ import (
 	//"log"
 )
 
+var cache map[string]string
+
 func main() {
 	err := models.Init("forum.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 	//users,posts,comments,likes := InitModels()
-	http.HandleFunc("/",handleMain)
+	cache = make(map[string]string)
+	http.HandleFunc("/main",handleMain)
 	http.HandleFunc("/registration",handleRegistration)
 	http.HandleFunc("/authentication",handleAuth)
 	log.Fatal(http.ListenAndServe(":8080", nil))
