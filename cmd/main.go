@@ -21,6 +21,7 @@ func main() {
 	//users,posts,comments,likes := InitModels()
 	http.HandleFunc("/",handleMain)
 	http.HandleFunc("/registration",handleRegistration)
+	http.HandleFunc("/authentication",handleAuth)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 
 }

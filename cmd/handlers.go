@@ -50,6 +50,33 @@ func handleRegistration(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		t.Execute(w,nil)
-	}
 
+	default:
+		fmt.Fprintf(w,"400 bad request")
+	}
+}
+
+func handleAuth(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		t,err := template.ParseFiles("../templates/authentication.html")
+		if err != nil {
+			fmt.Fprintf(w,"500 Internal server error")
+			return
+		}
+		t.Execute(w,nil)
+
+	case "POST":
+		username := r.FormValue("username")
+		password := r.FormValue("password")
+		err := Authenticate(username,password)
+		if err != nil {
+			fmt.Fprintf(w,err.Error())
+		}else {
+			fmt.Fprintf(w,"You are welcome!")
+		}
+
+	default:
+		fmt.Fprintf(w,"400 bad request")
+	}
 }
