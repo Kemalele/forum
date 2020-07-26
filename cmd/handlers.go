@@ -1,19 +1,25 @@
 package main
 
 import (
+	models "../models"
 	"fmt"
+	_ "github.com/satori/go.uuid"
 	uuid "github.com/satori/go.uuid"
 	"html/template"
 	"net/http"
-	models "../models"
-	_ "github.com/satori/go.uuid"
 	"time"
 )
 
 func handleMain(w http.ResponseWriter,r *http.Request) {
 	response, status := authenticate(r)
 	if status != http.StatusOK{
+		t,err := template.ParseFiles("../templates/index.html")
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
 		w.WriteHeader(status)
+		t.Execute(w,nil)
 		return
 	}
 
@@ -25,7 +31,8 @@ func handleAuth(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		t,err := template.ParseFiles("../templates/authentication.html")
 		if err != nil {
-			fmt.Fprintf(w,"500 Internal server error")
+			w.WriteHeader(http.StatusInternalServerError)
+			fmt.Fprintf(w,"%v",http.StatusInternalServerError)
 			return
 		}
 		t.Execute(w,nil)
@@ -43,12 +50,13 @@ func handleAuth(w http.ResponseWriter, r *http.Request) {
 		http.SetCookie(w, &http.Cookie{
 			Name : "session_token",
 			Value : sessionToken.String(),
-			Expires: time.Now().Add(120 * time.Second),
+			Expires: time.Now().Add(1 * time.Hour),
 			HttpOnly: true,
 		})
 		fmt.Fprintf(w,"Welcome!")
 
 	default:
+		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprintf(w,"400 bad request")
 	}
 }
@@ -60,7 +68,8 @@ func handleRegistration(w http.ResponseWriter, r *http.Request) {
 		var err error
 		id, err := uuid.NewV4()
 		if err != nil {
-			fmt.Fprintf(w, "%v Internal server error", http.StatusInternalServerError)
+			w.WriteHeader(http.StatusInternalServerError)
+			fmt.Fprintf(w, "500 Internal server error")
 			return
 		}
 
@@ -75,17 +84,18 @@ func handleRegistration(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, err.Error())
 			return
 		}
-		fmt.Println(user)
 
 	case "GET":
 		t,err := template.ParseFiles("../templates/registration.html")
 		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprintf(w,"500 Internal server error")
 			return
 		}
 		t.Execute(w,nil)
 
 	default:
+		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprintf(w,"400 bad request")
 	}
 }

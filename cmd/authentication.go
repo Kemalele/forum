@@ -3,7 +3,6 @@ package main
 import (
 	models "../models"
 	"errors"
-	"fmt"
 	"net/http"
 )
 
@@ -12,7 +11,8 @@ func correctUser(username,password string) error{
 	users.Init()
 	for _, usr := range users.Body {
 		if usr.Username == username {
-			if usr.Password == password {
+			decryptedPass, _ := decrypt(usr.Password)
+			if decryptedPass == password {
 				return nil
 			}else {
 				return errors.New("wrong password")

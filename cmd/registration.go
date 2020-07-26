@@ -19,6 +19,10 @@ func Register(usr models.User)  error {
 		return err
 	}
 
+	usr.Password,err = encrypt(usr.Password)
+	if err != nil {
+		return err
+	}
 	users.Add(usr,models.Db)
 	return nil
 }
