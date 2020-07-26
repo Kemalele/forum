@@ -79,7 +79,7 @@ func handleRegistration(w http.ResponseWriter, r *http.Request) {
 		user.Id = id.String()
 		user.RegistrationDate = time.Now().String()
 
-		err = Register(user)
+		err = register(user)
 		if err != nil {
 			fmt.Fprintf(w, err.Error())
 			return

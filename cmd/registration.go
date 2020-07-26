@@ -5,7 +5,7 @@ import (
 	"errors"
 )
 
-func Register(usr models.User)  error {
+func register(usr models.User)  error {
 	var users models.Users
 	users.Init()
 
