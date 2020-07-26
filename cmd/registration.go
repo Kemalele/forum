@@ -13,6 +13,7 @@ func Register(usr models.User)  error {
 	if err != nil {
 		return err
 	}
+
 	err = uniqueUser(usr)
 	if err != nil {
 		return err

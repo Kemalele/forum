@@ -11,24 +11,12 @@ import (
 )
 
 func handleMain(w http.ResponseWriter,r *http.Request) {
-	//fmt.Println(r.Cookies())
-	c,err := r.Cookie("session_token")
-	if err != nil {
-		if err == http.ErrNoCookie {
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		w.WriteHeader(http.StatusBadRequest)
+	response, status := authenticate(r)
+	if status != http.StatusOK{
+		w.WriteHeader(status)
 		return
 	}
 
-	sessionToken := c.Value
-	response := cache[sessionToken]
-	if response == "" {
-		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Println("no session in cache")
-		return
-	}
 	fmt.Fprintf(w,"Welcome %s",response)
 }
 
