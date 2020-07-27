@@ -5,4 +5,5 @@ type Post struct {
 	Description string
 	PostDate    string
 	UserId      string
+	Category 	string
 }

@@ -11,7 +11,7 @@ func (p *Posts) Init() error {
 	}
 	for rows.Next() {
 		post := Post{}
-		err := rows.Scan(&post.Id,&post.Description,&post.PostDate,&post.UserId)
+		err := rows.Scan(&post.Id,&post.Description,&post.PostDate,&post.UserId,&post.Category)
 		if err != nil {
 			return err
 		}
@@ -21,7 +21,7 @@ func (p *Posts) Init() error {
 }
 
 func (p *Posts) Add(post Post,sql SQLDB) error{
-	_,err := sql.Exec("INSERT INTO POST (Id,Description,Post_date,UserId) values ($1,$2,$3,$4)",post.Id,post.Description,post.PostDate,post.UserId)
+	_,err := sql.Exec("INSERT INTO POST (Id,Description,Post_date,UserId,Category) values ($1,$2,$3,$4,$5)",post.Id,post.Description,post.PostDate,post.UserId,post.Category)
 	if err != nil {
 		return err
 	}
