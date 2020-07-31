@@ -37,5 +37,5 @@ func authenticate(r *http.Request) (string,int){
 		return "",http.StatusUnauthorized
 	}
 
-	return response,http.StatusOK
+	return response,http.StatusOK ///nickname
 }

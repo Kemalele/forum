@@ -10,6 +10,9 @@ import (
 	"time"
 )
 
+
+var posts map[string]*models.Post
+
 func handleMain(w http.ResponseWriter,r *http.Request) {
 	response, status := authenticate(r)
 	if status != http.StatusOK{
@@ -21,9 +24,44 @@ func handleMain(w http.ResponseWriter,r *http.Request) {
 		w.WriteHeader(status)
 		t.Execute(w,nil)
 		return
+	} else {
+		t,err := template.ParseFiles("../templates/index.html")
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		w.WriteHeader(status)
+		t.Execute(w,posts)
 	}
+	fmt.Println(posts)
+	fmt.Println("posts")
+	_ = response
+}
 
-	fmt.Fprintf(w,"Welcome %s",response)
+func writePost(w http.ResponseWriter, r *http.Request){
+	t,err := template.ParseFiles("../templates/write.html")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	t.ExecuteTemplate(w, "write",nil)
+}
+
+func savepostHandler(w http.ResponseWriter, r *http.Request){
+
+	id := GenerateId()
+	description := r.FormValue("description")
+
+	t := time.Now()
+	postdate := t.Format(time.RFC1123)
+
+	userid , _ :=  authenticate(r)
+	category := ""
+	theme := r.FormValue("theme")
+
+	post := models.NewPost(id, description, postdate, userid, category, theme)
+	posts[post.Id] = post
+	http.Redirect(w,r,"/", 302)
 }
 
 func handleAuth(w http.ResponseWriter, r *http.Request) {

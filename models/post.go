@@ -6,4 +6,9 @@ type Post struct {
 	PostDate    string
 	UserId      string
 	Category 	string
+	Theme 		string
+}
+
+func NewPost(id, description, postdate, userid, category, theme string) *Post{
+	return &Post{id, description, postdate, userid, category, theme}
 }
