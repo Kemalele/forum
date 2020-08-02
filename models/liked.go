@@ -6,3 +6,4 @@ type Liked struct {
 	PostId string
 	UserId string
 }
+
