@@ -33,8 +33,6 @@ func handleMain(w http.ResponseWriter,r *http.Request) {
 		w.WriteHeader(status)
 		t.Execute(w,posts)
 	}
-	fmt.Println(posts)
-	fmt.Println("posts")
 	_ = response
 }
 
@@ -49,18 +47,23 @@ func writePost(w http.ResponseWriter, r *http.Request){
 
 func savepostHandler(w http.ResponseWriter, r *http.Request){
 
-	id := GenerateId()
-	description := r.FormValue("description")
+	var post models.Post
+	var err error
 
+	post.Id = GenerateId()
+	post.Description = r.FormValue("description")
 	t := time.Now()
-	postdate := t.Format(time.RFC1123)
-
+	post.PostDate = t.Format(time.RFC1123)
 	userid , _ :=  authenticate(r)
-	category := ""
-	theme := r.FormValue("theme")
+	post.UserId = userid
+	post.Category = "choumi"
+	post.Theme = r.FormValue("theme")
 
-	post := models.NewPost(id, description, postdate, userid, category, theme)
-	posts[post.Id] = post
+	err = NewPost(post)
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+		return
+	}
 	http.Redirect(w,r,"/", 302)
 }
 

@@ -19,6 +19,9 @@ func main() {
 	cache = make(map[string]string)
 	//css/
 	css := http.FileServer(http.Dir("css"))
+	if err != nil {
+		log.Fatal(err)
+	}
 	http.Handle("/css/", http.StripPrefix("/css/", css))
 
 	posts = make(map[string]*models.Post, 0)
