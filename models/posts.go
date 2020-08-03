@@ -26,7 +26,7 @@ func (p *Posts) Init() error {
 func (p *Posts) Add(post Post,sql SQLDB) error{
 	fmt.Println("new post")
 	_,err := sql.Exec("INSERT INTO POST (Id,Description,Post_date,UserId,Category,Theme) values ($1,$2,$3,$4,$5,$6)",post.Id,post.Description,post.PostDate,post.UserId,post.Category,post.Theme)
-	if err != nil {
+	if err != nil { 
 		return err
 	}
 	p.Body = append(p.Body,post)

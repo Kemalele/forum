@@ -32,5 +32,4 @@ func main() {
 	http.HandleFunc("/registration",handleRegistration)
 	http.HandleFunc("/authentication",handleAuth)
 	log.Fatal(http.ListenAndServe(":3030", nil))
-
 }
