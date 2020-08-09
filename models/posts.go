@@ -1,6 +1,9 @@
 package models
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Posts struct {
 	Body []Post
@@ -30,4 +33,13 @@ func (p *Posts) Add(post Post,sql SQLDB) error{
 	p.Body = append(p.Body,post)
 	fmt.Println(post)
 	return nil
+}
+
+func (p *Posts) GetPostById(Id string)(Post,error) {
+	for _,post := range p.Body {
+		if post.Id == Id {
+			return post,nil
+		}
+	}
+	return Post{},errors.New("no such user")
 }

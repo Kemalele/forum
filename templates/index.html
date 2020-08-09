@@ -84,12 +84,11 @@
 
     <div class="tagPost"><p>Posts</p></div>
 
-
         {{ range $post := . }}
             <div class="post">
                 <div class="row">
                     <div class="col-xs-8">
-                        <h1>{{ $post.Theme }}</h1>
+                        <a href="/post/{{ $post.Id }}"> <h1>{{ $post.Theme }}</h1> </a>
                     </div>
                 </div>
                 <div class="row">
