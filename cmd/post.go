@@ -6,14 +6,7 @@ import (
 )
 
 func NewPost(post models.Post)  error {
-	var posts models.Posts
-
-	err := posts.Init()
-	if err != nil{
-		return err
-	}
-
-	err = validPost(post)
+	err := validPost(post)
 	if err != nil {
 		return err
 	}

@@ -85,26 +85,26 @@
     <div class="tagPost"><p>Posts</p></div>
 
 
-        {{ range $key, $value := . }}
+        {{ range $post := . }}
             <div class="post">
                 <div class="row">
                     <div class="col-xs-8">
-                        <h1>{{ $value.Theme }}</h1>
+                        <h1>{{ $post.Theme }}</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
-                        {{ $value.Description }}
+                        {{ $post.Description }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
-                        {{ $value.PostDate }}
+                        {{ $post.PostDate }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
-                        {{ $value.UserId}}
+                        {{ $post.UserId}}
                     </div>
                 </div>
             </div>

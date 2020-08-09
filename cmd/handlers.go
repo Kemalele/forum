@@ -11,8 +11,6 @@ import (
 )
 
 
-var posts map[string]*models.Post
-
 func handleMain(w http.ResponseWriter,r *http.Request) {
 	t,err := template.ParseFiles("../templates/index.html")
 	if err != nil {
@@ -20,7 +18,7 @@ func handleMain(w http.ResponseWriter,r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	t.Execute(w,posts)
+	t.Execute(w,posts.Body)
 }
 
 func writePost(w http.ResponseWriter, r *http.Request){
