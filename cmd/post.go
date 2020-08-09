@@ -7,25 +7,30 @@ import (
 
 func NewPost(post models.Post)  error {
 	var posts models.Posts
+
 	err := posts.Init()
-	fmt.Println(err.Error())
+	if err != nil{
+		return err
+	}
 
 	err = validPost(post)
-	fmt.Println(post)
 	if err != nil {
 		return err
 	}
 
-	posts.Add(post,models.Db)
+	err = posts.Add(post,models.Db)
+	if err != nil {return err}
+
 	return nil
 }
 
 func validPost(p models.Post) error{
-	if len(p.Theme) > 1 {
+	if len(p.Theme) < 1 {
+		fmt.Println(p.Theme)
 		return errors.New("title must be at least 1 symbol")
 	}
 
-	if len(p.Description) > 1 {
+	if len(p.Description) < 1 {
 		return errors.New("content must be at least 1 symbol")
 	}
 
