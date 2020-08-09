@@ -1,5 +1,7 @@
 package models
 
+import "fmt"
+
 type Posts struct {
 	Body []Post
 }
@@ -11,7 +13,7 @@ func (p *Posts) Init() error {
 	}
 	for rows.Next() {
 		post := Post{}
-		err := rows.Scan(&post.Id,&post.Description,&post.PostDate,&post.UserId,&post.Category)
+		err := rows.Scan(&post.Id,&post.Description,&post.PostDate,&post.UserId,&post.Category,&post.Theme)
 		if err != nil {
 			return err
 		}
@@ -21,10 +23,11 @@ func (p *Posts) Init() error {
 }
 
 func (p *Posts) Add(post Post,sql SQLDB) error{
-	_,err := sql.Exec("INSERT INTO POST (Id,Description,Post_date,UserId,Category) values ($1,$2,$3,$4,$5)",post.Id,post.Description,post.PostDate,post.UserId,post.Category)
-	if err != nil {
+	_,err := sql.Exec("INSERT INTO POST (Id,Description,Post_date,UserId,Category,Theme) values ($1,$2,$3,$4,$5,$6)",post.Id,post.Description,post.PostDate,post.UserId,post.Category,post.Theme)
+	if err != nil { 
 		return err
 	}
 	p.Body = append(p.Body,post)
+	fmt.Println(post)
 	return nil
 }

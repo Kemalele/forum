@@ -10,20 +10,56 @@ import (
 	"time"
 )
 
+
 func handleMain(w http.ResponseWriter,r *http.Request) {
-	response, status := authenticate(r)
+	t,err := template.ParseFiles("../templates/index.html")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	t.Execute(w,posts.Body)
+}
+
+func writePost(w http.ResponseWriter, r *http.Request){
+	t,err := template.ParseFiles("../templates/write.html")
+
+	_ , status := authenticate(r)
 	if status != http.StatusOK{
-		t,err := template.ParseFiles("../templates/index.html")
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-		w.WriteHeader(status)
-		t.Execute(w,nil)
+		http.Redirect(w,r,"/authentication",status)
 		return
 	}
 
-	fmt.Fprintf(w,"Welcome %s",response)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	t.ExecuteTemplate(w, "write",nil)
+}
+
+func savepostHandler(w http.ResponseWriter, r *http.Request){
+	var post models.Post
+	var err error
+
+	post.Id = GenerateId()
+	post.Description = r.FormValue("description")
+	t := time.Now()
+	post.PostDate = t.Format(time.RFC1123)
+	userid , status := authenticate(r)
+	if status != http.StatusOK{
+		http.Redirect(w,r,"/authentication",status)
+		return
+	}
+	post.UserId = userid
+	post.Category = "choumi"
+	post.Theme = r.FormValue("theme")
+
+	err = NewPost(post)
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+		return
+	}
+	http.Redirect(w,r,"/", 302)
 }
 
 func handleAuth(w http.ResponseWriter, r *http.Request) {
@@ -53,7 +89,8 @@ func handleAuth(w http.ResponseWriter, r *http.Request) {
 			Expires: time.Now().Add(1 * time.Hour),
 			HttpOnly: true,
 		})
-		fmt.Fprintf(w,"Welcome!")
+		http.Redirect(w,r,"/",http.StatusSeeOther)
+		return
 
 	default:
 		w.WriteHeader(http.StatusBadRequest)
