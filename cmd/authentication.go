@@ -22,20 +22,28 @@ func correctUser(username,password string) error{
 	return errors.New("wrong username")
 }
 
-func authenticate(r *http.Request) (string,int){
+func authenticated(r *http.Request) (string,bool){
 	c,err := r.Cookie("session_token")
 	if err != nil {
-		if err == http.ErrNoCookie {
-			return "",http.StatusUnauthorized
-		}
-		return "",http.StatusBadRequest
+		return "", false
 	}
 
 	sessionToken := c.Value
+
+	// nickname
 	response := cache[sessionToken]
 	if response == "" {
-		return "",http.StatusUnauthorized
+		return "", false
 	}
 
-	return response,http.StatusOK ///nickname
+	return response,true
 }
+
+//func authenticated(r *http.Request) bool {
+//	_,err := r.Cookie("session_token")
+//	if err != nil {
+//		return false
+//	}
+//
+//	return true
+//}
