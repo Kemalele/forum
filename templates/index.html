@@ -80,11 +80,22 @@
 
 </div>
 
+<div class="Filters">
+    <h3>Sort by: </h3>
+    <form action="/?sortBy=" method="GET">
+        <select name="sortBy">
+            {{if .Authed}}
+            <option value="created">Created posts</option>
+            {{ end }}
+            <option value="empty">Empty</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
 <div class="Posts">
-
     <div class="tagPost"><p>Posts</p></div>
-
-        {{ range $post := . }}
+        {{ range $post := .Posts }}
             <div class="post">
                 <div class="row">
                     <div class="col-xs-8">

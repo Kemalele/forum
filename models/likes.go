@@ -1,30 +1,34 @@
 package models
 
-type Likes struct {
-	Body []Liked
+type Liked struct {
+	Id string
+	Value string
+	PostId string
+	UserId string
 }
 
-func (l *Likes) Init() error {
+func AllLikes() ([]Liked,error) {
+	var likes []Liked
 	rows,err := Db.Query("SELECT * FROM Liked")
 	if err != nil {
-		return err
+		return nil,err
 	}
+
 	for rows.Next() {
 		liked := Liked{}
 		err := rows.Scan(&liked.Id,&liked.Value,&liked.PostId,&liked.UserId)
 		if err != nil {
-			return err
+			return nil,err
 		}
-		l.Body = append(l.Body,liked)
+		likes = append(likes,liked)
 	}
-	return nil
+	return likes,nil
 }
 
-func (l *Likes) Add(liked Liked,sql SQLDB) error{
+func AddLike(liked Liked,sql SQLDB) error{
 	_,err := sql.Exec("INSERT INTO LIKED (Id,Value,PostId,UserId) values ($1,$2,$3,$4)",liked.Id,liked.Value,liked.PostId,liked.UserId)
 	if err != nil {
 		return err
 	}
-	l.Body = append(l.Body,liked)
 	return nil
 }

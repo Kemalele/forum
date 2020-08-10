@@ -25,7 +25,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82d709cc-42cc-4564-bdcd-695d3785d6d5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/cmd" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/site_styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/comments.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/comments.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/likes.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/likes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/posts.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/posts.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/users.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,17 +67,19 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/cmd" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/pkg" />
-      <recent name="$PROJECT_DIR$/cmd" />
+      <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/cmd" />
+      <recent name="$PROJECT_DIR$/pkg" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/cmd" />
       <recent name="$PROJECT_DIR$/models" />
     </key>
@@ -88,6 +100,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="0" y="215" key="#SQL_Dialects" timestamp="1597049187857">
+      <screen x="0" y="23" width="1440" height="796" />
+    </state>
+    <state x="0" y="215" key="#SQL_Dialects/0.23.1440.796@0.23.1440.796" timestamp="1597049187857" />
+    <state x="180" y="23" width="1079" height="796" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596998190760">
+      <screen x="0" y="23" width="1440" height="796" />
+    </state>
+    <state x="180" y="23" width="1079" height="796" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.796@0.23.1440.796" timestamp="1596998190760" />
     <state x="373" y="208" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595835264366">
       <screen x="0" y="23" width="1440" height="796" />
     </state>
@@ -97,9 +117,9 @@
     </state>
     <state x="149" y="23" key="SettingsEditor/0.23.1440.796@0.23.1440.796" timestamp="1595926672930" />
     <state x="149" y="23" key="SettingsEditor/0.23.1440.799@0.23.1440.799" timestamp="1595149490303" />
-    <state x="479" y="23" width="838" height="1032" key="search.everywhere.popup" timestamp="1596355832718">
+    <state x="479" y="23" width="838" height="1032" key="search.everywhere.popup" timestamp="1596994107701">
       <screen x="0" y="23" width="1440" height="796" />
     </state>
-    <state x="479" y="23" width="838" height="1032" key="search.everywhere.popup/0.23.1440.796@0.23.1440.796" timestamp="1596355832718" />
+    <state x="479" y="23" width="838" height="1032" key="search.everywhere.popup/0.23.1440.796@0.23.1440.796" timestamp="1596994107701" />
   </component>
 </project>
