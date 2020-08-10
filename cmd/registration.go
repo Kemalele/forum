@@ -6,8 +6,6 @@ import (
 )
 
 func register(usr models.User)  error {
-	var users models.Users
-	users.Init()
 
 	err := validUser(usr)
 	if err != nil {
@@ -23,7 +21,8 @@ func register(usr models.User)  error {
 	if err != nil {
 		return err
 	}
-	users.Add(usr,models.Db)
+
+	models.AddUser(usr,models.Db)
 	return nil
 }
 
@@ -39,18 +38,14 @@ func validUser(usr models.User) error{
 	return nil
 }
 
-func uniqueUser(usr models.User) error{
-	var users models.Users
-	users.Init()
+func uniqueUser(newUsr models.User) error{
+	user,err := models.UserByName(newUsr.Username)
+	if err != nil {
+		return err
+	}
 
-	for _,user := range users.Body {
-		if user.Username == usr.Username{
-			return errors.New("username already taken")
-		}
-
-		if user.Email == usr.Email {
-			return errors.New("email already taken")
-		}
+	if user != (models.User{}) {
+		return errors.New("username already taken")
 	}
 
 	return nil

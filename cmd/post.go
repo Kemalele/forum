@@ -11,7 +11,7 @@ func NewPost(post models.Post)  error {
 		return err
 	}
 
-	err = posts.Add(post,models.Db)
+	err = models.AddPost(post,models.Db)
 	if err != nil {return err}
 
 	return nil
