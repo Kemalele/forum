@@ -7,19 +7,28 @@ import (
 )
 
 func correctUser(username,password string) error{
-	var users models.Users
-	users.Init()
-	for _, usr := range users.Body {
-		if usr.Username == username {
-			decryptedPass, _ := decrypt(usr.Password)
-			if decryptedPass == password {
-				return nil
-			}else {
-				return errors.New("wrong password")
-			}
-		}
+	user,err := models.UserByName(username)
+	if err != nil {
+		return err
 	}
-	return errors.New("wrong username")
+
+	if user.Username == username {
+		decryptedPass, err := decrypt(user.Password)
+		if err != nil {
+			return err
+		}
+
+		if decryptedPass == password {
+			return nil
+		}else {
+			return errors.New("wrong password")
+
+		}
+
+	}else {
+		return errors.New("wrong username")
+	}
+
 }
 
 func authenticated(r *http.Request) (string,bool){
@@ -38,12 +47,3 @@ func authenticated(r *http.Request) (string,bool){
 
 	return response,true
 }
-
-//func authenticated(r *http.Request) bool {
-//	_,err := r.Cookie("session_token")
-//	if err != nil {
-//		return false
-//	}
-//
-//	return true
-//}
