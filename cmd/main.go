@@ -34,13 +34,14 @@ func main() {
 		log.Fatal(err)
 	}
 
-	r := router.New(handleMain)
-	r.Handle("GET","/",handleMain)
+	r := router.New(getMain)
+	r.Handle("GET","/",getMain)
 	r.Handle("GET","/write",writePost)
 	r.Handle("GET","/registration",getRegistration)
 	r.Handle("GET","/authentication",getAuth)
 	r.Handle("GET","/post/:id",handlePostPage)
 
+	//r.Handle("POST","/",handleMain)
 	r.Handle("POST","/savePost",savepostHandler)
 	r.Handle("POST","/registration",handleRegistration)
 	r.Handle("POST","/authentication",handleAuth)

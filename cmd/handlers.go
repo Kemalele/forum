@@ -12,15 +12,88 @@ import (
 )
 
 
-func handleMain(w http.ResponseWriter,r *http.Request,params url.Values) {
+func getMain(w http.ResponseWriter,r *http.Request,params url.Values) {
 	t,err := template.ParseFiles("../templates/index.html")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	t.Execute(w,posts.Body)
+
+
+	username, authed := authenticated(r)
+	sortBy := r.FormValue("sortBy")
+
+	response := struct {
+		Posts []models.Post
+		Authed bool
+	}{
+		Posts: posts.Body,
+		Authed: authed,
+	}
+
+	switch sortBy {
+		case "created":
+			if authed {
+				user,err := users.UserByName(username)
+				if err != nil {
+					fmt.Println(err.Error())
+					break
+				}
+
+				p,err := models.SortedPosts(sortBy,user)
+				if err != nil {
+					fmt.Println(err.Error())
+					break
+				}
+				response.Posts = p.Body
+			}
+		default:
+	}
+
+
+
+	t.Execute(w,response)
 }
+
+//func handleMain(w http.ResponseWriter,r *http.Request,params url.Values) {
+//	t,err := template.ParseFiles("../templates/index.html")
+//	if err != nil {
+//		w.WriteHeader(http.StatusInternalServerError)
+//		return
+//	}
+//	fmt.Println("post")
+//	sortBy := r.FormValue("sortBy")
+//	userName , status := authenticated(r)
+//
+//	if status != http.StatusOK{
+//		fmt.Fprintf(w,"ERROR: %v",status)
+//		return
+//	}
+//
+//	user,err := users.UserByName(userName)
+//	if err != nil {
+//		fmt.Println(err.Error())
+//		return
+//	}
+//
+//	p,err := models.SortedPosts(sortBy,user)
+//	if err != nil {
+//		fmt.Println(err.Error())
+//		return
+//	}
+//
+//	response := struct {
+//		Posts []models.Post
+//		Authed bool
+//	}{
+//		Posts: p.Body,
+//		Authed: authenticated(r),
+//	}
+//
+//	w.WriteHeader(http.StatusOK)
+//	t.Execute(w,response)
+//}
+
 
 func handlePostPage(w http.ResponseWriter, r *http.Request,params url.Values) {
 	fmt.Fprintf(w,"%v",params.Get("id"))
@@ -29,9 +102,9 @@ func handlePostPage(w http.ResponseWriter, r *http.Request,params url.Values) {
 func writePost(w http.ResponseWriter, r *http.Request,params url.Values){
 	t,err := template.ParseFiles("../templates/write.html")
 
-	_ , status := authenticate(r)
-	if status != http.StatusOK{
-		http.Redirect(w,r,"/authentication",status)
+	_ , ok := authenticated(r)
+	if !ok {
+		http.Redirect(w,r,"/authentication",http.StatusUnauthorized)
 		return
 	}
 
@@ -50,9 +123,9 @@ func savepostHandler(w http.ResponseWriter, r *http.Request,params url.Values){
 	post.Description = r.FormValue("description")
 	t := time.Now()
 	post.PostDate = t.Format(time.RFC1123)
-	userid , status := authenticate(r)
-	if status != http.StatusOK{
-		http.Redirect(w,r,"/authentication",status)
+	userid , ok := authenticated(r)
+	if !ok {
+		http.Redirect(w,r,"/authentication",http.StatusUnauthorized)
 		return
 	}
 	post.UserId = userid
