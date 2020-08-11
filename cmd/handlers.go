@@ -197,6 +197,8 @@ func handleRegistration(w http.ResponseWriter, r *http.Request,params url.Values
 		fmt.Fprintf(w, err.Error())
 		return
 	}
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+	return
 }
 
 func getRegistration(w http.ResponseWriter, r *http.Request,params url.Values) {
