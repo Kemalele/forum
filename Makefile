@@ -5,7 +5,7 @@ COMMIT_DATE := $(shell git show -s --format=%ci ${HASH})
 BUILD_DATE := $(shell date '+%Y-%m-%d %H:%M:%S')
 VERSION := ${HASH} (${COMMIT_DATE})
 
-clean:
+clean:x
 	go clean
 	rm -f bin/${BIN}
 
