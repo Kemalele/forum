@@ -25,17 +25,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82d709cc-42cc-4564-bdcd-695d3785d6d5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/cmd" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/site_styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/comments.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/comments.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/likes.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/likes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/posts.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/posts.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/users.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +40,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="/usr/local/Cellar/go/1.14.4/libexec" />
+  <component name="GOROOT" path="/usr/local/Cellar/go/1.14.6/libexec" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -65,11 +55,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="go.sdk" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -112,10 +105,10 @@
       <screen x="0" y="23" width="1440" height="796" />
     </state>
     <state x="373" y="208" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.796@0.23.1440.796" timestamp="1595835264366" />
-    <state x="149" y="23" key="SettingsEditor" timestamp="1595926672930">
+    <state x="149" y="23" key="SettingsEditor" timestamp="1597137490993">
       <screen x="0" y="23" width="1440" height="796" />
     </state>
-    <state x="149" y="23" key="SettingsEditor/0.23.1440.796@0.23.1440.796" timestamp="1595926672930" />
+    <state x="149" y="23" key="SettingsEditor/0.23.1440.796@0.23.1440.796" timestamp="1597137490993" />
     <state x="149" y="23" key="SettingsEditor/0.23.1440.799@0.23.1440.799" timestamp="1595149490303" />
     <state x="479" y="23" width="838" height="1032" key="search.everywhere.popup" timestamp="1596994107701">
       <screen x="0" y="23" width="1440" height="796" />
